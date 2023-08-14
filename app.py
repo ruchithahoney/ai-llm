@@ -22,7 +22,7 @@ iface = gr.Interface(fn=fraud_detection, inputs="text", outputs="text", layout="
                      description="Enter transaction details to predict whether it's fraudulent or legitimate.",
                      examples=[
                          ["Fake investment opportunity promising high returns"],
-                         ["balance withdrawl"],
+                         ["Monthly rent payment to a landlord"],
                      ],
                      allow_flagging="never"
                      )
