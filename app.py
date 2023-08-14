@@ -2,7 +2,7 @@ from transformers import pipeline
 import gradio as gr
 
 # Load the text classification model
-fraud_detector = pipeline("text-classification")
+fraud_detector = pipeline("text-classification", model="bert-base-uncased")
 
 def fraud_detection(transaction_details):
     prediction = fraud_detector(transaction_details)[0]
@@ -10,7 +10,7 @@ def fraud_detection(transaction_details):
     confidence = prediction['score']
     #print(label, confidence)
     
-    if label == 'NEGATIVE':
+    if label == 'LABEL_0':
         return f"Fraudulent. Confidence: {confidence:.2f}"
     else:
         return f"Legitimate. Confidence: {confidence:.2f}"
@@ -21,9 +21,8 @@ iface = gr.Interface(fn=fraud_detection, inputs="text", outputs="text", layout="
                      title="Fraud Detection System",
                      description="Enter transaction details to predict whether it's fraudulent or legitimate.",
                      examples=[
-                         ["Transfer of $300 to unknown account"],
-                         ["Purchase of groceries at a local store"],
-                         ["Unauthorized access to account"]
+                         ["Fake investment opportunity promising high returns"],
+                         ["balance withdrawl"],
                      ],
                      allow_flagging="never"
                      )
