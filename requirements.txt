@@ -1,0 +1,4 @@
+flax
+transformers
+huggingface_hub
+torch
